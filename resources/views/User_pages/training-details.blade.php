@@ -78,7 +78,7 @@
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="training" class="get-started-btn">Get Started</a>
+        <a href="/training" class="get-started-btn">Get Started</a>
 
     </div>
 </header><!-- End Header -->
@@ -103,6 +103,14 @@
             </ul>
         </div>
     @endif
+    @if(session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <section id="course-details" class="course-details">
         <div class="container" data-aos="fade-up">
 
@@ -123,7 +131,7 @@
                 <div class="col-lg-4">
 
                     <div class="course-info d-flex justify-content-between align-items-center">
-                        <h5>Trainer</h5>
+                        <h5>Instructor</h5>
                         <p>{{$training->item['name']}}</p>
                     </div>
 

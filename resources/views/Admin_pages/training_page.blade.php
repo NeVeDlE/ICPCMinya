@@ -37,9 +37,25 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('edit'))
+    @if(session()->has('Edit'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('edit') }}</strong>
+            <strong>{{ session()->get('Edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Delete'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Delete') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -102,9 +118,6 @@
 
                                 <td> @foreach($training->topics as  $topic)
                                         <label class="badge badge-success">{{ $topic }}</label>
-
-
-
                                     @endforeach
                                 </td>
                                 <td><a class="modal-effect btn-lg btn-info" data-effect="effect-scale"

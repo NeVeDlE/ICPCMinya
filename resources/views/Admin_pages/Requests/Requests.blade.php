@@ -37,9 +37,41 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('edit'))
+    @if(session()->has('Edit'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('edit') }}</strong>
+            <strong>{{ session()->get('Edit') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Update'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Update') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Search'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Search') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Notify'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Notify') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if(session()->has('Excel'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Excel') }}</strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -87,8 +119,10 @@
                                                 Accepted
                                             @elseif($type==2)
                                                 Pending
-                                            @else
+                                            @elseif($type==3)
                                                 Banned
+                                            @else
+                                                Choose Status
                                             @endif
                                         @else
                                             Choose Status
@@ -147,7 +181,8 @@
                                 <div class="col-3">
 
                                     <a class="btn ripple btn-light btn-block btn-rounded"
-                                       href="{{URL::route('Notify', [$trainID]) }}">Notify Accepted Students in this Training</a>
+                                       href="{{URL::route('Notify', [$trainID]) }}">Notify Accepted Students in this
+                                        Training</a>
                                 </div>
                             </div>
                         </div>

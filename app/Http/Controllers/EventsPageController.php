@@ -54,7 +54,7 @@ class EventsPageController extends Controller
             'description' => $request->description,
             "img" => $img_name,
         ]);
-        session()->flash('Add', 'Member Added');
+        session()->flash('Add', 'Event Added');
         return back();
     }
 

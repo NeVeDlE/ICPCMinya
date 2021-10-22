@@ -2508,26 +2508,26 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-success {
   color: #fff;
-  background-color: #22c03c;
-  border-color: #22c03c; }
+  background-color: #6996cb;
+  border-color: #6996cb; }
   .btn-success:hover {
     color: #fff;
-    background-color: #2e8a01;
-    border-color: #2a7d01; }
+    background-color: #4a82c3;
+    border-color: #4a82c3; }
   .btn-success:focus, .btn-success.focus {
-    box-shadow: 0 0 0 0.2rem rgba(88, 188, 39, 0.5); }
+    box-shadow: #4a82c3; }
   .btn-success.disabled, .btn-success:disabled {
     color: #fff;
-    background-color: #22c03c;
-    border-color: #22c03c; }
+    background-color: #4a82c3;
+    border-color: #4a82c3; }
   .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active {
     color: #fff;
-    background-color: #2a7d01;
-    border-color: #267101; }
+    background-color: #4a82c3;
+    border-color: #4a82c3; }
 
 .show > .btn-success.dropdown-toggle {
   color: #fff;
-  background-color: #2a7d01;
+  background-color: #4a82c3;
   border-color: #267101; }
 
 .btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus {
@@ -52525,7 +52525,7 @@ body {
 }
 
 a {
-    color: #5fcf80;
+    color: #feba12;
     text-decoration: none;
 }
 
@@ -52548,7 +52548,7 @@ h1, h2, h3, h4, h5, h6 {
     right: 15px;
     bottom: 15px;
     z-index: 996;
-    background: #5fcf80;
+    background: #ffb600;
     width: 40px;
     height: 40px;
     border-radius: 50px;
@@ -52560,7 +52560,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 0;
 }
 .back-to-top:hover {
-    background: #7ed899;
+    background: #feba12;
     color: #fff;
 }
 .back-to-top.active {
@@ -52643,7 +52643,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
 }
 #header .logo a {
-    color: #5fcf80;
+    color: #feba12;
 }
 #header .logo img {
     max-height: 60px;
@@ -52654,7 +52654,7 @@ h1, h2, h3, h4, h5, h6 {
 */
 .get-started-btn {
     margin-left: 22px;
-    background: #5fcf80;
+    background: #6996cb;
     color: #fff;
     border-radius: 50px;
     padding: 8px 25px;
@@ -52664,7 +52664,7 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
 }
 .get-started-btn:hover {
-    background: #3ac162;
+    background: #4a82c3;
     color: #fff;
 }
 @media (max-width: 768px) {
@@ -52711,7 +52711,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
 }
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
-    color: #5fcf80;
+    color: #4a82c3;
 }
 .navbar .dropdown ul {
     display: block;
@@ -52913,8 +52913,8 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 #hero .btn-get-started:hover {
-    background: #5fcf80;
-    border: 2px solid #5fcf80;
+    background: #feba12;
+    border: 2px solid #feba12;
 }
 @media (min-width: 1024px) {
     #hero {
@@ -52982,7 +52982,7 @@ section {
 .breadcrumbs {
     margin-top: 73px;
     text-align: center;
-    background: #5fcf80;
+    background: #feba12;
     padding: 30px 0;
     color: #fff;
 }
@@ -53049,7 +53049,7 @@ section {
 .counts .counters span {
     font-size: 48px;
     display: block;
-    color: #5fcf80;
+    color: #feba12;
     font-weight: 700;
 }
 .counts .counters p {
@@ -53173,7 +53173,7 @@ section {
     transition: 0.3s;
 }
 .courses .course-content h3 a:hover {
-    color: #5fcf80;
+    color: #4a82c3;
 }
 .courses .course-content p {
     font-size: 14px;
@@ -53181,7 +53181,7 @@ section {
 }
 .courses .course-content h4 {
     font-size: 14px;
-    background: #5fcf80;
+    background: #feba12;
     padding: 7px 14px;
     color: #fff;
     margin: 0;
@@ -53204,7 +53204,7 @@ section {
     padding-left: 10px;
     font-weight: 600;
     font-size: 16px;
-    color: #5a6c60;
+    color: #4a82c3;
 }
 .courses .trainer .trainer-rank {
     font-size: 18px;
@@ -53321,10 +53321,10 @@ section {
     height: 12px;
     background-color: #fff;
     opacity: 1;
-    border: 1px solid #5fcf80;
+    border: 1px solid #feba12;
 }
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-    background-color: #5fcf80;
+    background-color: #feba12;
 }
 @media (max-width: 767px) {
     .testimonials .testimonial-wrap {
@@ -53481,7 +53481,7 @@ section {
     margin-bottom: 20px;
 }
 .events .card-title a {
-    color: #37423b;
+    color: #4a82c3;
     transition: 0.3s;
 }
 .events .card-text {
@@ -53495,13 +53495,13 @@ section {
     transition: 0.3s;
 }
 .events .read-more a:hover {
-    color: #5fcf80;
+    color: #4a82c3;
 }
 .events .card:hover img {
     transform: scale(1.1);
 }
 .events .card:hover .card-body {
-    border-color: #5fcf80;
+    border-color: #4a82c3;
 }
 .events .card:hover .card-body .card-title a {
     color: #5fcf80;
@@ -53848,16 +53848,16 @@ section {
     font-size: 13px;
 }
 #footer .credits a {
-    color: #3ac162;
+    color: #feba12;
     transition: 0.3s;
 }
 #footer .credits a:hover {
-    color: #5fcf80;
+    color: #ffb600;
 }
 #footer .social-links a {
     font-size: 18px;
     display: inline-block;
-    background: #5fcf80;
+    background: #feba12;
     color: #fff;
     line-height: 1;
     padding: 8px 0;
@@ -53869,7 +53869,7 @@ section {
     transition: 0.3s;
 }
 #footer .social-links a:hover {
-    background: #3ac162;
+    background: #ffb600;
     color: #fff;
     text-decoration: none;
 }

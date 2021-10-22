@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/export', 'App\Http\Controllers\RequestsController@export')->name('export');
     Route::get('/admin/notify/{id}', 'App\Http\Controllers\RequestsController@Notify')->name('Notify');
     Route::get('/home', 'App\Http\Controllers\RequestsController@index')->name('home');
+    Route::get('/dashboard', 'App\Http\Controllers\RequestsController@index')->name('dashboard');
     Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
 });
 

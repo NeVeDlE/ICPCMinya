@@ -132,6 +132,7 @@ class RequestsController extends Controller
         } else if ($request->status == 6) {
             $trainees = Requests::select('*')->where('training', $request->id)->where('status', 2)->update(['status' => 3]);
         }
+        session()->flash('Update', 'Update Done');
         return back();
     }
 
@@ -149,6 +150,7 @@ class RequestsController extends Controller
     public function Search(Request $request)
     {
         //
+        session()->flash('Search', 'Search Done');
 
         $type = $request->type;
         if ($request->training == 'Choose Training' && $request->type == 'Choose Status') {
@@ -178,28 +180,19 @@ class RequestsController extends Controller
             $trainID = $request->training;
             return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings'));
         }
-        else{
 
-            $requests = Requests::paginate(10);
-            $trainings = TrainingPage::paginate(10);
-            $training = TrainingPage::select('name')->where('id', $request->training)->first();
-
-
-            $training = $request->training;
-            $training = $training['name'];
-            $trainID = $request->training;
-            return view('Admin_pages.Requests.Requests', compact('training', 'type', 'requests', 'trainings'));
-        }
 
     }
 
     public function export()
     {
+        session()->flash('Excel', 'Excel Done');
         return \Maatwebsite\Excel\Facades\Excel::download(new TraineesExport, 'Trainees.xlsx');
     }
     public function Notify($id){
 
         $trainees = Requests::where('training', $id)->where('status', 1)->get();
+        session()->flash('Notify', 'Notify Done');
         foreach ($trainees as $trainee) {
 
            $trainee->notify(new Notify());

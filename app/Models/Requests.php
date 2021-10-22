@@ -12,6 +12,6 @@ class Requests extends Model
     protected $guarded=[];
 
     public function item(){
-        return $this->belongsTo('App\Models\AboutPage','training');
+        return $this->belongsTo('App\Models\TrainingPage','training');
     }
 }
