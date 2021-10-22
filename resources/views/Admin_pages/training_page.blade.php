@@ -199,8 +199,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">: Training's Time In Format From -- To</label>
-                            <input type="text" class="form-control" id="date" name="date" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">: From</label>
+                                    <input type="datetime-local" class="form-control">
+                                </div>
+                                <div class="col-6">
+                                    <label for="">: To</label>
+                                    <input type="datetime-local" class="form-control">
+                                </div>
+                            </div>
+
+
                         </div>
 
                         <div class="form-group">
@@ -238,7 +248,8 @@
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="/trainingController/update" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="/trainingController/update" method="post" enctype="multipart/form-data"
+                      autocomplete="off">
                     {{method_field('patch')}}
                     {{ csrf_field() }}
                     <div class="modal-body">

@@ -143,7 +143,7 @@
                     <div class="course-info d-flex justify-content-between align-items-center">
 
                         <a class="modal-effect btn btn-success btn-block" style="color: white" data-target="#modaldemo1"
-                           data-toggle="modal" href="">Sign Up</a>
+                           data-toggle="modal" href="">Enroll</a>
 
 
                     </div>
@@ -170,7 +170,7 @@
                         aria-hidden="true">&times;</span></button>
             </div>
 
-            <form action="{{route('requests.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('requests.store')}}" method="post" id="enrollment" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="modal-body">
@@ -241,6 +241,7 @@
     </div>
 </div>
 
+
 <!-- End Basic modal -->
 <!-- ======= Footer ======= -->
 <footer id="footer">
@@ -261,6 +262,8 @@
         </div>
     </div>
 </footer><!-- End Footer -->
+<script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <!-- Internal Select2 js-->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
@@ -280,7 +283,6 @@
 
 <!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
-<script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap Bundle js -->
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->
@@ -310,6 +312,33 @@
 <!-- custom js -->
 <script src="{{URL::asset('assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+<script>
+
+    $('#enrollment').validate({ // initialize the plugin
+        rules: {
+            national: {
+                required: true,
+                minlength: 11,
+            },
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            national: {
+                required: "you have to enter your national",
+                minlength: " min 11 "
+            },
+            email: {
+                required: "We need your email address to contact you",
+                email: "Ysshoswwedfsfm"
+            }
+        }
+    });
+
+</script>
 </body>
 
 </html>

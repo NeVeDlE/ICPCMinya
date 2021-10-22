@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AboutPage;
 use App\Models\Requests;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -17,7 +18,12 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        $faker=Factory::create('en_US');
+        User::create([
+            'name'=>'ahmed',
+            'email'=>'ahmed@gmail.com',
+            'password'=>bcrypt('ahmed@gmail.com')
+        ]);
+       /* $faker=Factory::create('en_US');
         for($i=0; $i<100;$i++)
         {
             AboutPage::create([
@@ -27,6 +33,6 @@ class UserSeeder extends Seeder
                 'img'=>'1634836424.jpg'
 
             ]);
-        }
+        }*/
     }
 }

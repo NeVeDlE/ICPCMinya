@@ -18,6 +18,7 @@
 			<h2>Oopps. The page you were looking for doesn't exist.</h2>
 			<h6>You may have mistyped the address or the page may have moved.</h6><a class="btn btn-outline-danger" href="{{ url('/' . $page='index') }}">Back to Home</a>
 		</div>
+
 		<!-- /Main-error-wrapper -->
 @endsection
 @section('js')
