@@ -113,7 +113,7 @@
                                 <td>{{$training['tag']}}</td>
                                 <td>{{$training['description']}}</td>
                                 <td>{{$training->item->name}}</td>
-                                <td>{{$training['date']}}</td>
+                                <td>{{$training['from']}} -- {{$training['to']}}</td>
 
 
                                 <td> @foreach($training->topics as  $topic)
@@ -126,8 +126,8 @@
                                        data-tag="{{$training['tag']}}"
                                        data-description="{{$training['description']}}"
                                        data-mentor="{{$training->item->name}}"
-                                       data-date="{{$training['date']}}"
-
+                                       data-from="{{$training['from']}}"
+                                       data-to="{{$training['to']}}"
                                        data-toggle="modal"
                                        href="#modaldemo2"
                                        title="edit"><i class="las la-pen"></i></a>
@@ -182,7 +182,9 @@
 
                         <div class="form-group">
                             <label for="">: Training's Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <textarea class="form-control" id="description" name="description" required>
+
+                            </textarea>
                         </div>
 
                         <div class="form-group">
@@ -202,15 +204,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="">: From</label>
-                                    <input type="datetime-local" class="form-control">
+                                    <input type="date" class="form-control" name="from" id="from">
                                 </div>
                                 <div class="col-6">
                                     <label for="">: To</label>
-                                    <input type="datetime-local" class="form-control">
+                                    <input type="date" class="form-control" name="to" id="to">
                                 </div>
                             </div>
-
-
                         </div>
 
                         <div class="form-group">
@@ -266,7 +266,10 @@
 
                         <div class="form-group">
                             <label for="">: Training's Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <textarea class="form-control" id="description" name="description" required>
+
+                            </textarea>
+
                         </div>
 
                         <div class="form-group">
@@ -281,8 +284,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">: Training's Time In Format From -- To</label>
-                            <input type="text" class="form-control" id="date" name="date" required>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="">: From</label>
+                                    <input type="date" class="form-control" name="from" id="from">
+                                </div>
+                                <div class="col-6">
+                                    <label for="">: To</label>
+                                    <input type="date" class="form-control" name="to" id="to">
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -397,13 +408,15 @@
             var tag = button.data('tag')
             var mentor = button.data('mentor')
 
-            var date = button.data('date')
+            var from = button.data('from')
+            var to = button.data('to')
             var description = button.data('description')
             var modal = $(this)
 
             modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #name').val(name);
-            modal.find('.modal-body #date').val(date);
+            modal.find('.modal-body #from').val(from);
+            modal.find('.modal-body #to').val(to);
             modal.find('.modal-body #tag').val(tag);
             modal.find('.modal-body #mentor').val(mentor);
             modal.find('.modal-body #description').val(description);

@@ -50,7 +50,8 @@ class TrainingPageController extends Controller
             'mentor' => 'required',
             'tag' => 'required',
             'topics' => 'required',
-            'date' => 'required',
+            'from' => 'required',
+            'to' => 'required',
             'img' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ]);
         $ex = $request->img->getClientOriginalExtension();
@@ -61,7 +62,8 @@ class TrainingPageController extends Controller
             'mentor' => $request->mentor,
             'tag' => $request->tag,
             'topics' => $request->topics,
-            'date' => $request->date,
+            'from' => $request->from,
+            'to' => $request->to,
             'description' => $request->description,
             "img" => $img_name,
         ]);
@@ -109,7 +111,8 @@ class TrainingPageController extends Controller
             'mentor' => 'required',
             'tag' => 'required',
             'topics' => 'required',
-            'date' => 'required',
+            'from' => 'required',
+            'to' => 'required',
             'img' => 'image|mimes:jpg,png,jpeg|max:2048',
         ]);
         $old = TrainingPage::where('id', $request->id)->first();
@@ -131,7 +134,8 @@ class TrainingPageController extends Controller
             'mentor' => $request->mentor,
             'tag' => $request->tag,
             'topics' => $request->topics,
-            'date' => $request->date,
+            'from' => $request->from,
+            'to' => $request->to,
             'description' => $request->description,
             "img" => $img_name,
         ]);

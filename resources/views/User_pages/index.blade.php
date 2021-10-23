@@ -79,7 +79,7 @@
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
                     <h3>ICPC Minya University Community</h3>
-                    <p class="fst-italic" style="font-size: 27px">
+                    <p class="fst" style="font-size: 20px">
                         ICPC Minya Goat Club for Competitive Programming is a student activity at Minya University.
                         We are the first step for you on your journey in Competitive Programming world
                         Our main goal is to improve the level of the students in competitive programming and improve
@@ -145,11 +145,11 @@
                 &copy; Copyright <strong><span>NeVeDlE</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Edited by <a href="https://github.com/NeVeDlE">NeVeDlE</a>
+                Edited by <a href="https://github.com/NeVeDlE"target="_blank">NeVeDlE</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="https://www.facebook.com/icpcminya" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.facebook.com/icpcminya" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
         </div>
     </div>
 </footer><!-- End Footer -->

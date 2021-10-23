@@ -19,7 +19,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">About Page</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ User Pages Controller</span>
+                <h4 class="content-title mb-0 my-auto">Members Page</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ User Pages Controller</span>
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
@@ -151,10 +151,11 @@
                             <label for="">: Member's Job</label>
                             <input type="text" class="form-control" id="job" name="job" required>
                         </div>
-
                         <div class="form-group">
                             <label for="">: Member's Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <textarea class="form-control" id="description" name="description" required>
+
+                            </textarea>
                         </div>
 
                         <div class="form-group">
@@ -195,8 +196,10 @@
                             <input type="text" class="form-control" id="job" name="job" required>
                         </div>
                         <div class="form-group">
-                            <label>Member Description:</label>
-                            <input type="text" class="form-control" id="description" name="description"  required>
+                            <label for="">: Member's Description</label>
+                            <textarea class="form-control" id="description" name="description" required>
+
+                            </textarea>
                         </div>
 
                         <div class="form-group">

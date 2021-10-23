@@ -19,7 +19,8 @@ class CreateTrainingPagesTable extends Migration
             $table->text('tag');
             $table->text('description');
             $table->unsignedBigInteger('mentor');
-            $table->text('date');
+            $table->date('from');
+            $table->date('to');
             $table->string('img');
             $table->text('topics');
             $table->foreign('mentor')->references('id')->on('about_pages')->onDelete('cascade');

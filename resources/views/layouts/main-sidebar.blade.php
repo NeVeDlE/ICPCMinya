@@ -44,7 +44,7 @@
                     </svg>
                     <span class="side-menu__label">User Pages Controller</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
-                    <li><a class="slide-item" href="/aboutController">About Page</a></li>
+                    <li><a class="slide-item" href="/aboutController">Members Page</a></li>
                     <li><a class="slide-item" href="/trainingController">Training Page</a></li>
                     <li><a class="slide-item" href="/eventsController">Events Page</a></li>
                 </ul>

@@ -13,13 +13,9 @@ class UserPagesController extends Controller
     //
     public function about()
     {
+        $count =AboutPage::count();
         $members=AboutPage::all();
-       return view('User_pages.about',compact('members'));
-    }
-
-    public function contact()
-    {
-        return view('User_pages.contact');
+       return view('User_pages.about',compact('members','count'));
     }
 
     public function details($id)
@@ -30,23 +26,17 @@ class UserPagesController extends Controller
 
     public function training()
     {
+        $count =TrainingPage::count();
         $trainings=TrainingPage::paginate(20);
-        return view('User_pages.training',compact('trainings'));
+        return view('User_pages.training',compact('trainings','count'));
     }
 
     public function events()
     {
+        $count =EventsPage::count();
         $events=EventsPage::paginate(20);
-        return view('User_pages.events',compact('events'));
+        return view('User_pages.events',compact('events','count'));
     }
 
-    public function pricing()
-    {
-        return view('User_pages.pricing');
-    }
 
-    public function trainers()
-    {
-        return view('User_pages.trainers');
-    }
 }

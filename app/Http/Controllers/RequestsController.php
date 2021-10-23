@@ -49,7 +49,7 @@ class RequestsController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'numeric|required|digits:11',
-            'national' => 'numeric|digits:14',
+            'national' => 'numeric|digits:14|required',
             'email' => 'required|email',
             'university' => 'required',
             'faculty' => 'required',

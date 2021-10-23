@@ -21,6 +21,12 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
+    <style>
+        label.error {
+            color: #dc3545;
+            font-size: 14px;
+        }
+    </style>
     <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -138,7 +144,7 @@
 
                     <div class="course-info d-flex justify-content-between align-items-center">
                         <h5>Schedule</h5>
-                        <p>{{$training['date']}}</p>
+                        <p>{{$training['from']}} / {{$training['to']}}</p>
                     </div>
                     <div class="course-info d-flex justify-content-between align-items-center">
 
@@ -254,11 +260,11 @@
                 &copy; Copyright <strong><span>NeVeDlE</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Edited by <a href="https://github.com/NeVeDlE">NeVeDlE</a>
+                Edited by <a href="https://github.com/NeVeDlE" target="_blank">NeVeDlE</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="https://www.facebook.com/icpcminya" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.facebook.com/icpcminya"target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
         </div>
     </div>
 </footer><!-- End Footer -->
@@ -319,21 +325,69 @@
         rules: {
             national: {
                 required: true,
+                minlength: 14,
+                maxlength: 14,
+                number:true,
+            },
+            phone: {
+                required: true,
                 minlength: 11,
+                maxlength: 11,
+                number:true,
             },
             email: {
                 required: true,
                 email: true
+            },
+            name: {
+                required: true,
+            },
+            university: {
+                required: true,
+            },
+            faculty: {
+                required: true,
+            },
+            training: {
+                required: true,
+            },
+            year: {
+                required: true,
             }
         },
         messages: {
             national: {
-                required: "you have to enter your national",
-                minlength: " min 11 "
+                required: "You have to enter your national",
+                minlength: "14 Digits Required",
+                maxlength: "14 Digits Required",
+                number: "National is only numeric"
+            },
+            phone: {
+                required: "You have to enter your Phone",
+                minlength: "11 Digits Required",
+                maxlength: "11 Digits Required",
+                number: "Phone is only numeric"
             },
             email: {
                 required: "We need your email address to contact you",
-                email: "Ysshoswwedfsfm"
+                email: "This Email isn't valid"
+            },
+            name: {
+                required: "Your Name is required",
+
+            },
+            university: {
+                required: "Your University is required",
+            },
+            faculty: {
+                required: "Your Faculty is required",
+            },
+            training: {
+                required: "Training is required",
+            }
+            ,
+            year: {
+                required: "Your College Year is required",
             }
         }
     });

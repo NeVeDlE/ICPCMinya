@@ -74,36 +74,42 @@
         <div class="container" data-aos="fade-up">
 
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                @foreach($trainings as $training)
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                        <div class="course-item">
-                            <a href="{{URL::route('training-details', [$training->id]) }}"> <img
-                                    src="{{asset('Trainings/'.$training['img'])}}" style="height: 400px;width: 400px"
-                                    class="img" alt="..."></a>
-                            <div class="course-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4>{{$training['tag']}}</h4>
+                @if($count>0)
+                    @foreach($trainings as $training)
 
-                                </div>
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="course-item">
+                                <a href="{{URL::route('training-details', [$training->id]) }}"> <img
+                                        src="{{asset('Trainings/'.$training['img'])}}"
+                                        style="height: 400px;width: 400px"
+                                        class="img" alt="..."></a>
+                                <div class="course-content">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4>{{$training['tag']}}</h4>
 
-                                <h3>
-                                    <a href="{{URL::route('training-details', [$training->id]) }}">{{$training['name']}}</a>
-                                </h3>
-                                <p>{{$training['description']}}</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="{{asset('Members/'.$training->item['img'])}} "
-                                             style="height: 70px; width: 50px" class="img-fluid" alt="">
-                                        <span>{{$training->item['name']}}</span>
                                     </div>
 
+                                    <h3>
+                                        <a href="{{URL::route('training-details', [$training->id]) }}">{{$training['name']}}</a>
+                                    </h3>
+                                    <p>{{$training['description']}}</p>
+                                    <div class="trainer d-flex justify-content-between align-items-center">
+                                        <div class="trainer-profile d-flex align-items-center">
+                                            <img src="{{asset('Members/'.$training->item['img'])}} "
+                                                 style="height: 70px; width: 50px" class="img-fluid" alt="">
+                                            <span>{{$training->item['name']}}</span>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-            @endforeach
-            <!-- End Course Item-->
+                    @endforeach
+                <!-- End Course Item-->
+                @else
+                    <h3>Wait For our Trainings Soon .....</h3>
+                @endif
 
             </div>
 
@@ -123,11 +129,11 @@
                 &copy; Copyright <strong><span>NeVeDlE</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Edited by <a href="https://github.com/NeVeDlE">NeVeDlE</a>
+                Edited by <a href="https://github.com/NeVeDlE" target="_blank">NeVeDlE</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="https://www.facebook.com/icpcminya" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.facebook.com/icpcminya" target="_blank"class="facebook"><i class="bx bxl-facebook"></i></a>
         </div>
     </div>
 </footer><!-- End Footer -->

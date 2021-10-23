@@ -153,8 +153,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">: Events's Description</label>
-                            <input type="text" class="form-control" id="description" name="description" required>
+                            <label for="">: Event's Description</label>
+                            <textarea class="form-control" id="description" name="description" required>
+                            </textarea>
                         </div>
 
                         <div class="form-group">
@@ -195,8 +196,10 @@
                             <input type="text" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="form-group">
-                            <label>Event's Description:</label>
-                            <input type="text" class="form-control" id="description" name="description"  required>
+                            <label for="">: Event's Description</label>
+                            <textarea class="form-control" id="description" name="description" required>
+
+                            </textarea>
                         </div>
 
                         <div class="form-group">

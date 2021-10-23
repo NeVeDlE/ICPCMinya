@@ -41,7 +41,8 @@
 
         <h1 class="logo me-auto"><a href="/index">ICPC Minya University</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="/index" class="logo me-auto"><img style="width: 90px" src="/assets/img/01.png" alt="" class="img-fluid"></a>
+        <a href="/index" class="logo me-auto"><img style="width: 90px" src="/assets/img/01.png" alt=""
+                                                   class="img-fluid"></a>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
@@ -73,20 +74,25 @@
         <div class="container" data-aos="fade-up">
 
             <div class="row">
-                @foreach($events as $event)
-                    <div class="col-md-6 d-flex align-items-stretch">
-                        <div class="card">
-                            <div class="card-img">
-                                <img src="{{asset('Event/'.$event['img'])}}" alt="..." style="width: 700px;height: 700px">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{$event['name']}}</h5>
-                                <p class="fst-italic text-center">{{$event['date']}}</p>
-                                <p class="card-text">{{$event['description']}}</p>
+                @if($count>0)
+                    @foreach($events as $event)
+                        <div class="col-md-6 d-flex align-items-stretch">
+                            <div class="card">
+                                <div class="card-img">
+                                    <img src="{{asset('Event/'.$event['img'])}}" alt="..."
+                                         style="width: 700px;height: 700px">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$event['name']}}</h5>
+                                    <p class="fst-italic text-center">{{$event['date']}}</p>
+                                    <p class="card-text">{{$event['description']}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <h3>Wait For our Events Soon .....</h3>
+                @endif
 
             </div>
 
@@ -106,11 +112,11 @@
                 &copy; Copyright <strong><span>NeVeDlE</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                Edited by <a href="https://github.com/NeVeDlE">NeVeDlE</a>
+                Edited by <a href="https://github.com/NeVeDlE" target="_blank">NeVeDlE</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="https://www.facebook.com/icpcminya" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.facebook.com/icpcminya"target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
         </div>
     </div>
 </footer><!-- End Footer -->
