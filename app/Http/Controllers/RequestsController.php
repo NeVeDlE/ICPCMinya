@@ -22,8 +22,8 @@ class RequestsController extends Controller
     public function index()
     {
         //
-        $trainings=TrainingPage::paginate(10);
-        return view('Admin_pages.Requests.Requests',compact('trainings'));
+        $trainings = TrainingPage::paginate(10);
+        return view('Admin_pages.Requests.Requests', compact('trainings'));
     }
 
     /**
@@ -45,38 +45,6 @@ class RequestsController extends Controller
     public function store(Request $request)
     {
         //
-
-        $this->validate($request, [
-            'name' => 'required',
-            'phone' => 'numeric|required|digits:11',
-            'national' => 'numeric|digits:14|required',
-            'email' => 'required|email',
-            'university' => 'required',
-            'faculty' => 'required',
-            'training' => 'numeric|required',
-            'year' => 'numeric|required',
-
-        ]);
-        $national = Requests::where('national', $request->national)->first();
-        $email = Requests::where('email', $request->email)->first();
-        $phone = Requests::where('phone', $request->phone)->first();
-
-        if ($national != null && $national->training == $request->training || $email != null && $email->training == $request->training || $phone != null && $phone->training == $request->training) {
-            return back()->withErrors('Email or National ID or Phone Number already registered');
-        }
-        Requests::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'national' => $request->national,
-            'email' => $request->email,
-            'university' => $request->university,
-            'faculty' => $request->faculty,
-            'training' => $request->training,
-            'year' => $request->year,
-            'status' => 2,
-        ]);
-        session()->flash('Add', 'Registration Done');
-        return back();
     }
 
     /**
@@ -153,6 +121,7 @@ class RequestsController extends Controller
         session()->flash('Search', 'Search Done');
 
         $type = $request->type;
+        $status = 0;
         if ($request->training == 'Choose Training' && $request->type == 'Choose Status') {
             $requests = Requests::paginate(10);
             $trainings = TrainingPage::paginate(10);
@@ -161,24 +130,33 @@ class RequestsController extends Controller
         } else if ($request->training == 'Choose Training' && $request->type != 'Choose Status') {
             $requests = Requests::select('*')->where('status', '=', $request->type)->paginate(10);
             $trainings = TrainingPage::paginate(10);
-            $training = TrainingPage::select('name')->where('id', $request->training)->first();
+            $training = TrainingPage::select('name', 'status')->where('id', $request->training)->first();
+            $minya = Requests::where('training', $request->training)->where('university', '1')->count();
+            $other = Requests::where('training', $request->training)->count() - $minya;
+            $status = $training['status'];
             $training = $training['name'];
             $trainID = $request->training;
-            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings'));
+            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings', 'status', 'minya', 'other'));
         } else if ($request->training != 'Choose Training' && $request->type == 'Choose Status') {
             $requests = Requests::select('*')->where('training', '=', $request->training)->paginate(10);
             $trainings = TrainingPage::paginate(10);
-            $training = TrainingPage::select('name')->where('id', $request->training)->first();
+            $training = TrainingPage::select('name', 'status')->where('id', $request->training)->first();
+            $minya = Requests::where('training', $request->training)->where('university', '1')->count();
+            $other = Requests::where('training', $request->training)->count() - $minya;
+            $status = $training['status'];
             $training = $training['name'];
             $trainID = $request->training;
-            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings'));
-        } else if($request->training!=null&&$request->training != 'Choose Training' && $request->type != 'Choose Status') {
+            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings', 'status', 'minya', 'other'));
+        } else if ($request->training != null && $request->training != 'Choose Training' && $request->type != 'Choose Status') {
             $requests = Requests::select('*')->where('training', '=', $request->training)->where('status', '=', $request->type)->paginate(10);
             $trainings = TrainingPage::paginate(10);
-            $training = TrainingPage::select('name')->where('id', $request->training)->first();
+            $training = TrainingPage::select('name', 'status')->where('id', $request->training)->first();
+            $minya = Requests::where('training', $request->training)->where('university', '1')->count();
+            $other = Requests::where('training', $request->training)->count() - $minya;
+            $status = $training['status'];
             $training = $training['name'];
             $trainID = $request->training;
-            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings'));
+            return view('Admin_pages.Requests.Requests', compact('trainID', 'training', 'type', 'requests', 'trainings', 'status', 'minya', 'other'));
         }
 
 
@@ -189,15 +167,17 @@ class RequestsController extends Controller
         session()->flash('Excel', 'Excel Done');
         return \Maatwebsite\Excel\Facades\Excel::download(new TraineesExport, 'Trainees.xlsx');
     }
-    public function Notify($id){
+
+    public function Notify($id)
+    {
 
         $trainees = Requests::where('training', $id)->where('status', 1)->get();
         session()->flash('Notify', 'Notify Done');
         foreach ($trainees as $trainee) {
 
-           $trainee->notify(new Notify());
+            $trainee->notify(new Notify());
         }
-      return back();
+        return back();
 
     }
 

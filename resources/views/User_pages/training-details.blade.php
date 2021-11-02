@@ -61,6 +61,12 @@
     <link href="{{URL::asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
     <!---Skinmodes css-->
     <link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <!--Internal  treeview -->
+    <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -70,9 +76,10 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="/index">ICPC Minya University</a></h1>
+        <h1 class="logo me-auto"><a href="/index">ICPC Minya</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="index" class="logo me-auto"><img style="width: 90px" src="/assets/img/01.png" alt="" class="img-fluid"></a>
+        <a href="/index" class="logo me-auto"><img style="width: 90px" src="/assets/img/01.png" alt=""
+                                                   class="img-fluid"></a>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
@@ -91,7 +98,7 @@
 
 <main id="main">
 
-<!-- ======= Breadcrumbs ======= -->
+    <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
         <div class="container">
             <h2>Training Details</h2>
@@ -109,14 +116,16 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+    @if (session()->has('Add'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Add') }}",
+                    type: "success"
+                })
+            }
+        </script>
+    @endif>
     <section id="course-details" class="course-details">
         <div class="container" data-aos="fade-up">
 
@@ -147,9 +156,12 @@
                         <p>{{$training['from']}} / {{$training['to']}}</p>
                     </div>
                     <div class="course-info d-flex justify-content-between align-items-center">
-
-                        <a class="modal-effect btn btn-success btn-block" style="color: white" data-target="#modaldemo1"
-                           data-toggle="modal" href="">Enroll</a>
+                        @if($training['status']==1)
+                            <a class="modal-effect btn btn-success btn-block" style="color: white"
+                               data-target="#modaldemo1"
+                               data-toggle="modal" href="">Enroll</a>
+                        @else <h5 class="text-danger" style="text-align: center">Registration Closed</h5>
+                        @endif
 
 
                     </div>
@@ -176,8 +188,9 @@
                         aria-hidden="true">&times;</span></button>
             </div>
 
-            <form action="{{route('requests.store')}}" method="post" id="enrollment" enctype="multipart/form-data">
+            <form action="{{route('enroll')}}" method="post" id="enrollment" enctype="multipart/form-data">
                 {{ csrf_field() }}
+                {{method_field("GET")}}
 
                 <div class="modal-body">
                     <div class="form-group">
@@ -189,7 +202,7 @@
                         <input type="text" class="form-control" id="phone" name="phone" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Codeforces Handle (If Found) :</label>
+                        <label for="">Codeforces :</label>
                         <input type="text" class="form-control" id="handle" name="handle">
                     </div>
                     <div class="form-group">
@@ -264,7 +277,8 @@
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
-            <a href="https://www.facebook.com/icpcminya"target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.facebook.com/icpcminya" target="_blank" class="facebook"><i
+                    class="bx bxl-facebook"></i></a>
         </div>
     </div>
 </footer><!-- End Footer -->
@@ -327,19 +341,22 @@
                 required: true,
                 minlength: 14,
                 maxlength: 14,
-                number:true,
+                number: true,
             },
             phone: {
                 required: true,
                 minlength: 11,
                 maxlength: 11,
-                number:true,
+                number: true,
             },
             email: {
                 required: true,
                 email: true
             },
             name: {
+                required: true,
+            },
+            handle: {
                 required: true,
             },
             university: {
@@ -388,11 +405,19 @@
             ,
             year: {
                 required: "Your College Year is required",
+            },
+            handle: {
+                required: "We use your handle to invite you to our CF groups",
             }
+
         }
     });
 
 </script>
+<script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+<!--Internal  Notify js -->
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 </body>
 
 </html>

@@ -18,10 +18,10 @@ class TrainingPageController extends Controller
     public function index()
     {
         //
-        $topics=Topics::paginate(10, ['*'], 'topics');
-        $trainings=TrainingPage::paginate(10, ['*'], 'trainings');
+        $topics = Topics::paginate(10, ['*'], 'topics');
+        $trainings = TrainingPage::paginate(10, ['*'], 'trainings');
         $members = AboutPage::paginate(20, ['*'], 'members');
-        return view('Admin_pages.training_page', compact('members','trainings','topics'));
+        return view('Admin_pages.training_page', compact('members', 'trainings', 'topics'));
     }
 
     /**
@@ -37,7 +37,7 @@ class TrainingPageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,6 +65,7 @@ class TrainingPageController extends Controller
             'from' => $request->from,
             'to' => $request->to,
             'description' => $request->description,
+            'status' => 0,
             "img" => $img_name,
         ]);
         session()->flash('Add', 'Training Added');
@@ -74,7 +75,7 @@ class TrainingPageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TrainingPage  $trainingPage
+     * @param \App\Models\TrainingPage $trainingPage
      * @return \Illuminate\Http\Response
      */
     public function show(TrainingPage $trainingPage)
@@ -85,7 +86,7 @@ class TrainingPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TrainingPage  $trainingPage
+     * @param \App\Models\TrainingPage $trainingPage
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request)
@@ -97,8 +98,8 @@ class TrainingPageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TrainingPage  $trainingPage
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\TrainingPage $trainingPage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -146,17 +147,37 @@ class TrainingPageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TrainingPage  $trainingPage
+     * @param \App\Models\TrainingPage $trainingPage
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         //
-        $training=TrainingPage::where('id',$request->id)->first();
+        $training = TrainingPage::where('id', $request->id)->first();
         Storage::disk('training')->delete($training->img);
         $training->delete();
         session()->flash('Delete', 'Training Deleted');
         return back();
+
+    }
+
+    public function changeStatus($id)
+    {
+        //
+
+        $training = TrainingPage::where('id', $id)->first();
+        if ($training['status'] == 0) {
+            $training->update([
+                'status' => 1,
+            ]);
+        } else {
+            $training->update([
+                'status' => 0,
+            ]);
+        }
+        $status = $training['status'];
+        session()->flash('Update', 'Enrolling Status Changed');
+        return back()->with(compact('status'));
 
     }
 }

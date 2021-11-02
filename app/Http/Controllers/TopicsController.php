@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventsPage;
 use App\Models\Topics;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class TopicsController extends Controller
     public function index()
     {
         //
+        $topics=Topics::paginate(20);
+        return view('Admin_pages.topics',compact('topics'));
     }
 
     /**
@@ -76,9 +79,18 @@ class TopicsController extends Controller
      * @param  \App\Models\Topics  $topics
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Topics $topics)
+    public function update(Request $request)
     {
         //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $old = Topics::where('id', $request->id)->first();
+        $old->update([
+            'name' => $request->name,
+        ]);
+        session()->flash('Edit', 'Topic Edited');
+        return back();
     }
 
     /**
@@ -87,8 +99,13 @@ class TopicsController extends Controller
      * @param  \App\Models\Topics  $topics
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topics $topics)
+    public function destroy(Request $request)
     {
         //
+        $topic=Topics::where('id',$request->id)->first();
+
+        $topic->delete();
+        session()->flash('Delete', 'Topic Deleted');
+        return back();
     }
 }

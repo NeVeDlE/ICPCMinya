@@ -13,6 +13,12 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <!--Internal  treeview -->
+    <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -37,29 +43,36 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('Edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Add'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Add') }}",
+                    type: "success"
+                })
+            }
+        </script>
+    @endif>
+
+    @if (session()->has('Edit'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Edit') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if(session()->has('Delete'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Delete'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Delete') }}",
+                    type: "danger"
+                })
+            }
+        </script>
     @endif
     <!-- row -->
     <div class="row">
@@ -77,23 +90,18 @@
                     <div class="row">
                         <div class="col-3">
 
-                            <a class="btn ripple btn-success btn-block btn-rounded" data-target="#modaldemo1"
+                            <a class="btn ripple btn-success btn-rounded" data-target="#modaldemo1"
                                data-toggle="modal"
                                href="">Add a Training</a>
                         </div>
-                        <div class="col-3">
 
-                            <a class="btn ripple btn-info btn-block btn-rounded" data-target="#modaldemo4"
-                               data-toggle="modal"
-                               href="">Add a Topic To Choose In Topics For Trainings</a>
-                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table id="example1" class="table text-md-nowrap">
                         <thead>
                         <tr>
-                            <th class="border-bottom-0">ID</th>
+                            <th class="border-bottom-0">#</th>
                             <th class="border-bottom-0">Name</th>
                             <th class="border-bottom-0">Tag</th>
                             <th class="border-bottom-0">Description</th>
@@ -105,10 +113,11 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php $i=1 @endphp
 
                         @foreach($trainings as $training)
                             <tr>
-                                <td>{{$training['id']}}</td>
+                                <td>{{$i++}}</td>
                                 <td>{{$training['name']}}</td>
                                 <td>{{$training['tag']}}</td>
                                 <td>{{$training['description']}}</td>
@@ -182,9 +191,9 @@
 
                         <div class="form-group">
                             <label for="">: Training's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="description" name="description" required>
 
-                            </textarea>
+
                         </div>
 
                         <div class="form-group">
@@ -266,9 +275,7 @@
 
                         <div class="form-group">
                             <label for="">: Training's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
-
-                            </textarea>
+                            <input class="form-control" id="description" name="description" required>
 
                         </div>
 
@@ -350,29 +357,7 @@
     <!-- end delete modal -->
 
     <!-- topic modal -->
-    <div class="modal" id="modaldemo4">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">Add Topic</h6>
-                    <button aria-label="Close" class="close" data-dismiss="modal"
-                            type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <form action="{{route('topics.store')}}" method="post">
-                    {{csrf_field()}}
-                    <div class="modal-body">
 
-                        <input class="form-control" name="name" id="name" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Confirm</button>
-                    </div>
-            </div>
-            </form>
-        </div>
-    </div>
-    <!-- end topic modal -->
 @endsection
 @section('js')
     <!--Internal  Datepicker js -->
@@ -433,4 +418,9 @@
             modal.find('.modal-body #name').val(name);
         });
     </script>
+    <!-- Internal Treeview js -->
+    <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 @endsection

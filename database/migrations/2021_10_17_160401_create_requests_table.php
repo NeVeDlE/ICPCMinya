@@ -18,7 +18,7 @@ class CreateRequestsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->string('handle')->nullable();
+            $table->string('handle');
             $table->string('national');
             $table->integer('university');
             $table->integer('faculty');

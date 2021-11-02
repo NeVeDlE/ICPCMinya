@@ -23,6 +23,7 @@ class CreateTrainingPagesTable extends Migration
             $table->date('to');
             $table->string('img');
             $table->text('topics');
+            $table->integer('status');
             $table->softDeletes();
             $table->foreign('mentor')->references('id')->on('about_pages')->onDelete('cascade');
 

@@ -13,6 +13,16 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!--Internal  Font Awesome -->
+    <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <!--Internal  treeview -->
+    <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -37,45 +47,55 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('Edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Edit'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Edit') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Update'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Update') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Update'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Update') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Search'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Search') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Search'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Search') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Notify'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Notify') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Notify'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Notify') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Excel'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Excel') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Excel'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Excel') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
     <!-- row -->
     <div class="row">
@@ -184,6 +204,27 @@
                                        href="{{URL::route('Notify', [$trainID]) }}">Notify Accepted Students in this
                                         Training</a>
                                 </div>
+                                <div class="col-3">
+
+                                    @if($status==1)
+                                        <a class="btn ripple btn-success btn-block btn-rounded"
+                                           href="{{URL::route('Status', [$trainID]) }}">Current Enrolling Status is
+                                            ON</a>
+                                    @else
+                                        <a class="btn ripple btn-danger btn-block btn-rounded"
+                                           href="{{URL::route('Status', [$trainID]) }}">Current Enrolling Status is
+                                            OFF</a>
+                                    @endif
+
+                                </div>
+                                <div class="col-3">
+                                    <label for="" class="text-success">Requests From Minya in this Training
+                                        = {{$minya}}</label>
+                                    <br>
+                                    <label for="" class="text-warning">Requests From Others in this Training
+                                        = {{$other}}</label>
+
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -192,7 +233,7 @@
                         <table id="example1" class="table text-md-nowrap">
                             <thead>
                             <tr>
-                                <th class="border-bottom-0">ID</th>
+                                <th class="border-bottom-0">#</th>
                                 <th class="border-bottom-0">Name</th>
                                 <th class="border-bottom-0">University</th>
                                 <th class="border-bottom-0">Faculty</th>
@@ -204,10 +245,11 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php $i=1 @endphp
 
                             @foreach($requests as $request)
                                 <tr>
-                                    <td>{{$request['id']}}</td>
+                                    <td>{{$i++}}</td>
                                     <td>{{$request['name']}}</td>
                                     @if($request['university']==1)
                                         <td class="text-success">Minya</td>
@@ -289,7 +331,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">Accept all from minya in this training</h6>
+                    <h6 class="modal-title">Accept all from Minya in this training</h6>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -506,5 +548,9 @@
             modal.find('.modal-body #name').val(name);
         });
     </script>
+    <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
 @endsection

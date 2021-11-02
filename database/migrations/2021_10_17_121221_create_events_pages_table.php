@@ -16,7 +16,7 @@ class CreateEventsPagesTable extends Migration
         Schema::create('events_pages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('date');
+            $table->date('date');
             $table->text('description');
             $table->text('img');
             $table->softDeletes();

@@ -13,6 +13,12 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <!--Internal  treeview -->
+    <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -37,29 +43,36 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Add'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Add') }}",
+                    type: "success"
+                })
+            }
+        </script>
+    @endif>
+
+    @if (session()->has('Edit'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Edit') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if(session()->has('Delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Delete'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Delete') }}",
+                    type: "danger"
+                })
+            }
+        </script>
     @endif
     <!-- row -->
     <div class="row">
@@ -85,7 +98,7 @@
                     <table id="example1" class="table text-md-nowrap">
                         <thead>
                         <tr>
-                            <th class="border-bottom-0">ID</th>
+                            <th class="border-bottom-0">#</th>
                             <th class="border-bottom-0">Name</th>
                             <th class="border-bottom-0">Job</th>
                             <th class="border-bottom-0">Description</th>
@@ -94,17 +107,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php $i=1 @endphp
                         @foreach($members as $member)
 
                             <tr>
-                                <td>{{$member['id']}}</td>
+                                <td>{{$i++}}</td>
                                 <td>{{$member['name']}}</td>
                                 <td>{{$member['job']}}</td>
                                 <td>{{$member['description']}}</td>
                                 <td><a class="modal-effect btn-lg btn-info" data-effect="effect-scale"
 
-                                       data-id="{{$member['id']}}" data-name="{{$member['name']}}" data-job="{{$member['job']}}"
-                                       data-description="{{$member['description']}}" data-toggle="modal" href="#modaldemo2"
+                                       data-id="{{$member['id']}}" data-name="{{$member['name']}}"
+                                       data-job="{{$member['job']}}"
+                                       data-description="{{$member['description']}}" data-toggle="modal"
+                                       href="#modaldemo2"
                                        title="edit"><i class="las la-pen"></i></a>
 
                                     <a class="modal-effect btn-lg  btn-danger" data-effect="effect-scale"
@@ -153,9 +169,8 @@
                         </div>
                         <div class="form-group">
                             <label for="">: Member's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="description" name="description" required>
 
-                            </textarea>
                         </div>
 
                         <div class="form-group">
@@ -189,7 +204,7 @@
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
                             <label>Member Name:</label>
-                            <input type="text" class="form-control" id="name" name="name"  required>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label>Member Job:</label>
@@ -197,14 +212,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">: Member's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="description" name="description" required>
 
-                            </textarea>
                         </div>
 
                         <div class="form-group">
                             <label>Member Photo:</label>
-                            <input type="file" class="form-control"name="img" id="img">
+                            <input type="file" class="form-control" name="img" id="img">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -295,4 +309,8 @@
             modal.find('.modal-body #name').val(name);
         });
     </script>
+    <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 @endsection

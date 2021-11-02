@@ -25,7 +25,7 @@ Route::get('/', function () {
     $events+=\App\Models\EventsPage::onlyTrashed()->count();
     $mentors = \App\Models\AboutPage::count();
     $mentors+=\App\Models\AboutPage::onlyTrashed()->count();
-    return view('user_pages.index',compact('trainees','trainings','events','mentors'));});
+    return view('User_pages.index',compact('trainees','trainings','events','mentors'));});
 Route::get('/index', function () {
     $trainees = \App\Models\Requests::where('status',1)->count();
     $trainees+=\App\Models\Requests::onlyTrashed()->where('status',1)->count();
@@ -35,16 +35,15 @@ Route::get('/index', function () {
     $events+=\App\Models\EventsPage::onlyTrashed()->count();
     $mentors = \App\Models\AboutPage::count();
     $mentors+=\App\Models\AboutPage::onlyTrashed()->count();
-    return view('user_pages.index',compact('trainees','trainings','events','mentors'));});
+    return view('User_pages.index',compact('trainees','trainings','events','mentors'));});
 
 Route::get('about', 'App\Http\Controllers\UserPagesController@about');
 Route::get('training', 'App\Http\Controllers\UserPagesController@training');
 Route::get('training-details/{id}', 'App\Http\Controllers\UserPagesController@details')->name('training-details');
 Route::get('events', 'App\Http\Controllers\UserPagesController@events');
+Route::get('enroll', 'App\Http\Controllers\UserPagesController@enroll')->name('enroll');
 Route::group(['middleware' => ['auth']], function () {
     // your routes
-
-
     Route::resource('aboutController', 'App\Http\Controllers\AboutPageController');
     Route::resource('trainingController', 'App\Http\Controllers\TrainingPageController');
     Route::resource('eventsController', 'App\Http\Controllers\EventsPageController');
@@ -56,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'App\Http\Controllers\RequestsController@index')->name('home');
     Route::get('/dashboard', 'App\Http\Controllers\RequestsController@index')->name('dashboard');
     Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
+    Route::get('/admin/changeStatus/{id}', 'App\Http\Controllers\TrainingPageController@changeStatus')->name('Status');
 });
 
 

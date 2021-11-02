@@ -13,6 +13,12 @@
     <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <!--Internal  Font Awesome -->
+    <link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+    <!--Internal  treeview -->
+    <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -37,29 +43,36 @@
             </ul>
         </div>
     @endif
-    @if(session()->has('Edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Add'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Add') }}",
+                    type: "success"
+                })
+            }
+        </script>
+    @endif>
+
+    @if (session()->has('Edit'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Edit') }}",
+                    type: "success"
+                })
+            }
+        </script>
     @endif
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if(session()->has('Delete'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    @if (session()->has('Delete'))
+        <script>
+            window.onload = function () {
+                notif({
+                    msg: "{{session()->get('Delete') }}",
+                    type: "danger"
+                })
+            }
+        </script>
     @endif
     <!-- row -->
     <div class="row">
@@ -85,7 +98,7 @@
                     <table id="example1" class="table text-md-nowrap">
                         <thead>
                         <tr>
-                            <th class="border-bottom-0">ID</th>
+                            <th class="border-bottom-0">#</th>
                             <th class="border-bottom-0">Name</th>
                             <th class="border-bottom-0">Date</th>
                             <th class="border-bottom-0">Description</th>
@@ -94,17 +107,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php $i=1 @endphp
                         @foreach($events as $event)
 
                             <tr>
-                                <td>{{$event['id']}}</td>
+                                <td>{{$i++}}</td>
                                 <td>{{$event['name']}}</td>
                                 <td>{{$event['date']}}</td>
                                 <td>{{$event['description']}}</td>
                                 <td><a class="modal-effect btn-lg btn-info" data-effect="effect-scale"
 
-                                       data-id="{{$event['id']}}" data-name="{{$event['name']}}" data-date="{{$event['date']}}"
-                                       data-description="{{$event['description']}}" data-toggle="modal" href="#modaldemo2"
+                                       data-id="{{$event['id']}}" data-name="{{$event['name']}}"
+                                       data-date="{{$event['date']}}"
+                                       data-description="{{$event['description']}}" data-toggle="modal"
+                                       href="#modaldemo2"
                                        title="edit"><i class="las la-pen"></i></a>
 
                                     <a class="modal-effect btn-lg  btn-danger" data-effect="effect-scale"
@@ -149,13 +165,12 @@
 
                         <div class="form-group">
                             <label for="">: Events's Date</label>
-                            <input type="text" class="form-control" id="date" name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" required>
                         </div>
 
                         <div class="form-group">
                             <label for="">: Event's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
-                            </textarea>
+                            <input class="form-control" id="description" name="description" required>
                         </div>
 
                         <div class="form-group">
@@ -189,7 +204,7 @@
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
                             <label>Event's Name:</label>
-                            <input type="text" class="form-control" id="name" name="name"  required>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label>Event's date:</label>
@@ -197,14 +212,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">: Event's Description</label>
-                            <textarea class="form-control" id="description" name="description" required>
+                            <input class="form-control" id="description" name="description" required>
 
-                            </textarea>
                         </div>
 
                         <div class="form-group">
                             <label>Event's Photo:</label>
-                            <input type="file" class="form-control"name="img" id="img">
+                            <input type="file" class="form-control" name="img" id="img">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -295,4 +309,9 @@
             modal.find('.modal-body #name').val(name);
         });
     </script>
+    <!-- Internal Treeview js -->
+    <script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+    <!--Internal  Notify js -->
+    <script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+    <script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 @endsection

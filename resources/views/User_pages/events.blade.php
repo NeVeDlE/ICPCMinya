@@ -39,7 +39,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="/index">ICPC Minya University</a></h1>
+        <h1 class="logo me-auto"><a href="/index">ICPC Minya</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <a href="/index" class="logo me-auto"><img style="width: 90px" src="/assets/img/01.png" alt=""
                                                    class="img-fluid"></a>
@@ -80,7 +80,7 @@
                             <div class="card">
                                 <div class="card-img">
                                     <img src="{{asset('Event/'.$event['img'])}}" alt="..."
-                                         style="width: 700px;height: 700px">
+                                         style="width: 500px;height: 400px">
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{$event['name']}}</h5>
